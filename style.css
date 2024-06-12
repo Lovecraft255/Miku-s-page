@@ -6,3 +6,30 @@ canvas {
 body {
   background-color: black;
 }
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  margin: 0 auto;
+  background-color: #f0f0f0; /* Color de fondo */
+}
+
+@media (max-width: 576px) {
+  canvas {
+    width: 100%;
+    height: auto;
+  }
+
+  body {
+    background-color: #fff; /* Cambiar color de fondo del body */
+    font-size: 14px; /* Ajustar tamaño de fuente */
+  }
+
+  #mensaje {
+    display: none; /* Ocultar el canvas con el mensaje */
+  }
+}
