@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+  <head>
+       
+    <meta charset="UTF-8" />
+       
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       
+    <title>Miku,s page</title>
+       
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+       
+    <link rel="stylesheet" href="style.css" />
+     
+  </head>
+
+  <body>
+    <canvas id="mensaje"></canvas>
+    <canvas id="miCanvas"></canvas>    
+    <script>
+      function drawHeart(ctx, x, y, width, height, color) {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(x, y + height / 4);
+        ctx.quadraticCurveTo(x, y, x + width / 4, y);
+        ctx.quadraticCurveTo(x + width / 2, y, x + width / 2, y + height / 4);
+        ctx.quadraticCurveTo(x + width / 2, y, x + (width * 3) / 4, y);
+        ctx.quadraticCurveTo(x + width, y, x + width, y + height / 4);
+        ctx.quadraticCurveTo(
+          x + width,
+          y + (height * 2) / 3,
+          x + width / 2,
+          y + height
+        );
+        ctx.quadraticCurveTo(x, y + (height * 2) / 3, x, y + height / 4); // Código para dibujar el corazón
+        ctx.fill();
+      }
+
+      function animateHearts() {
+        var hearts = [];
+
+        function createHeart() {
+          var heart = {
+            x: Math.random() * canvas.width,
+            y: canvas.height,
+            size: Math.random() * 20 + 10,
+            speed: Math.random() * 2 + 1,
+            color: "#" + Math.floor(Math.random() * 16777215).toString(16),
+          };
+          hearts.push(heart);
+        }
+
+        function drawHearts() {
+          for (var i = 0; i < hearts.length; i++) {
+            var heart = hearts[i];
+            drawHeart(
+              ctx,
+              heart.x,
+              heart.y,
+              heart.size,
+              heart.size,
+              heart.color
+            );
+            heart.y -= heart.speed;
+            if (heart.y < -heart.size) {
+              hearts.splice(i, 1);
+            }
+          }
+        }
+        setInterval(function () {
+          createHeart();
+        }, 500);
+
+        setInterval(function () {
+          createHeart();
+        }, 200);
+
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          drawHearts();
+          drawMessage();
+          requestAnimationFrame(animate);
+        }
+
+        animate();
+      }
+
+      function drawMessage() {
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+
+        var lines = [
+          "En la penumbra de mi ser, tu luz fulgura,",
+          "Gracias por el amor que en mi alma perdura.",
+          "Te admiro siempre, en cada amanecer,",
+          "Eres mi eterna musa, mi querer.",
+        ];
+
+        var lineHeight = 20;
+        var x = canvas.width / 2;
+        var y = 80;
+        lines.forEach(function (line) {
+          ctx.fillText(line, x, y);
+          y += lineHeight;
+        });
+      }
+
+      var mimesaje = document.getElementById("mensaje");
+      var canvas = document.getElementById("miCanvas");
+      var ctx = canvas.getContext("2d");
+      canvas.width = 400; // Establecer ancho del canvas
+      canvas.height = 400; // Establecer altura del canvas
+
+      animateHearts();
+    </script>
+     
+  </body>
+</html>
