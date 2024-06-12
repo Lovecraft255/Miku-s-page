@@ -15,7 +15,7 @@ body {
 canvas {
   display: block;
   margin: 0 auto;
-  background-color: #f0f0f0; /* Color de fondo */
+  background-color: black; /* Color de fondo */
 }
 
 @media (max-width: 576px) {
@@ -25,7 +25,7 @@ canvas {
   }
 
   body {
-    background-color: #fff; /* Cambiar color de fondo del body */
+    background-color: black; /* Cambiar color de fondo del body */
     font-size: 14px; /* Ajustar tamaño de fuente */
   }
 
